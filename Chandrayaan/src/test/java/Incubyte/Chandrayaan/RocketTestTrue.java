@@ -64,4 +64,23 @@ public class RocketTestTrue
         Assert.assertEquals(Expected_Y, y);
         Assert.assertEquals(Expected_Z, z);
     }
+    @Test
+    public void shouldAnswerWithTrue4()
+    {
+    	char[] command = {'u','f','f','r','u','b'};
+    	String Expected_Direction="S";
+    	int Expected_X = 0;
+    	int Expected_Y = 1;
+    	int Expected_Z = 2;
+        Lander go = new Lander(0,0,0, "N", command);
+        go.Test();
+        String Direction = go.direction;
+        int x = go.x;
+        int y = go.y;
+        int z = go.z;
+        Assert.assertEquals(Expected_Direction, Direction);
+        Assert.assertEquals(Expected_X, x);
+        Assert.assertEquals(Expected_Y, y);
+        Assert.assertEquals(Expected_Z, z);
+    }
 }
