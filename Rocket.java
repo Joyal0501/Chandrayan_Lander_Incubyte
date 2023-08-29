@@ -1,9 +1,22 @@
+package Incubyte.Chandrayaan;
+
+/**
+ * Hello world!
+ *
+ */
+public class Rocket 
+{
+    public static void main( String[] args )
+    {
+        System.out.println( "Hello World!" );
+    }
+}
 class Lander{
     char[] move;
     int x,y,z;
     String direction;
-    String previosDir;
-    String previosDirComplement;
+    String previousDir;
+    String previousDirComplement;
 
     Lander(int x, int y, int z, String dir, char[] move)
     {
@@ -12,17 +25,17 @@ class Lander{
         this.z = z;
         this.direction= dir;
         this.move = move;
-        this.previosDir=dir;
+        this.previousDir=dir;
     }
-    void previosDirComplement(String previosDir)
+    void previousDirComplement(String previousDir)
     {
-        switch(previosDir){
-            case "N":previosDirComplement="S"; break;
-            case "S":previosDirComplement="N"; break;
-            case "W":previosDirComplement="E"; break;
-            case "E":previosDirComplement="W"; break;
-            case "Up":previosDirComplement="Dn"; break;
-            case "Dn":previosDirComplement="Up"; break;
+        switch(previousDir){
+            case "N":previousDirComplement="S"; break;
+            case "S":previousDirComplement="N"; break;
+            case "W":previousDirComplement="E"; break;
+            case "E":previousDirComplement="W"; break;
+            case "Up":previousDirComplement="Down"; break;
+            case "Down":previousDirComplement="Up"; break;
 
         }
     }
@@ -33,7 +46,7 @@ class Lander{
             case "W":x--; break;
             case "E":x++; break;
             case "Up": z++; break;
-            case "Dn": z--; break;
+            case "Down": z--; break;
 
         }
     }
@@ -45,17 +58,18 @@ class Lander{
             case "W":x++; break;
             case "E":x--; break;
             case "Up": z--; break;
-            case "Dn": z++; break;
+            case "Down": z++; break;
         }
     }
     void turnLeft(){
+        
         switch(direction){
-            case "N": direction="w"; break;
+            case "N": direction="W"; break;
             case "S":direction="E"; break;
             case "W":direction="S"; break;
             case "E":direction="N"; break;
-            case "Up": direction=previosDir; break;
-            case "Dn": direction=previosDirComplement; break;
+            case "Up": direction=previousDir; turnLeft(); break;
+            case "Down":direction=previousDirComplement; turnRight(); break;
         }
     }
     void turnRight(){
@@ -64,48 +78,54 @@ class Lander{
             case "S":direction="W"; break;
             case "W":direction="N"; break;
             case "E":direction="S"; break;
-            case "Up": direction=previosDirComplement; break;
-            case "Dn": direction=previosDir; break;
+            case "Up":  direction=previousDirComplement; turnLeft(); break;
+            case "Down": direction=previousDir; turnRight(); break;
         }
     }
     void turnUp()
     {
-        previosDir = direction;
+        previousDir = direction;
+        previousDirComplement(previousDir);
         switch(direction){
             case "N": direction="Up"; break;
             case "S":direction="Up"; break;
             case "W":direction="Up"; break;
             case "E":direction="Up"; break;
-            case "Up": direction=previosDirComplement; break;
-            case "Dn": direction=previosDir; break;
+            case "Up": direction=previousDirComplement; break;
+            case "Down": direction=previousDir; break;
         }
     }
     void turnDown()
     {
-        previosDir = direction;
+        previousDir = direction;
+        previousDirComplement(previousDir);
         switch(direction){
-            case "N": direction="Dn"; break;
-            case "S":direction="Dn"; break;
-            case "W":direction="Dn"; break;
-            case "E":direction="Dn"; break;
-            case "Up": direction=previosDir; break;
-            case "Dn": direction=previosDirComplement; break;
+            case "N": direction="Down"; break;
+            case "S":direction="Down"; break;
+            case "W":direction="Down"; break;
+            case "E":direction="Down"; break;
+            case "Up": direction=previousDir; break;
+            case "Down": direction=previousDirComplement; break;
         }
     }
-    void Test(){
+    String Test(){
 
-        System.out.println(move);
-        System.out.println(x+""+y+""+z);
-        System.out.println(direction);
+        for(char c : move)
+
+        {
+                    
+            switch(c){
+                case 'f': moveForward(); break;
+                case 'b': moveBackward(); break;
+                case 'l': turnLeft(); break;
+                case 'r': turnRight(); break;
+                case 'u': turnUp(); break;
+                case 'd': turnDown(); break;
+            }
+            //System.out.println(previousDirComplement);
+        }
+        return direction;
+        
     }
 
-}
-
-class Rocket{
-
-    public static void main(String[] args) {
-        char[] command = {'f','r','u','b','l'};
-        Lander go = new Lander(0,0,0, "N", command);
-        go.Test();
-    }
 }
