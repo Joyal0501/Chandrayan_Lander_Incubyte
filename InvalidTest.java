@@ -9,7 +9,7 @@ import org.junit.Test;
 public class InvalidTest 
 {
     /**
-     * Rigorous Test :-)
+      Rigorous Test :-)
      */
     
     @Test(expected=NullPointerException.class)

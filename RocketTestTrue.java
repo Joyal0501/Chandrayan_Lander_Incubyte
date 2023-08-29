@@ -10,7 +10,7 @@ import org.junit.Test;
  */
 public class RocketTestTrue 
 {
-    /**
+    /*
      * Rigorous Test :-)
      */
 	

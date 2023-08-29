@@ -1,9 +1,5 @@
 package Incubyte.Chandrayaan;
 
-/**
- * Hello world!
- *
- */
 public class Rocket 
 {
     public static void main( String[] args )
